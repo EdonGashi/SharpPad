@@ -304,5 +304,3 @@ Boolean.prototype.dump = dumpSelf
 Symbol.prototype.dump = dumpSelf
 
 module.exports = dump
-
-dump.html('<p><a href="http://www.gooogle.com">Go to Google</a></p>', 'Title')
