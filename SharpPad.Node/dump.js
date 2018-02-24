@@ -1,5 +1,4 @@
 const http = require('http')
-const util = require('util')
 const stackman = require('stackman')()
 
 function sendData(data, port) {
