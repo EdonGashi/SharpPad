@@ -89,13 +89,10 @@ function simplify(value) {
   }
 
   const ctor = value.constructor
-  if (ctor === Number) {
-    return Number(value)
-  } else if (ctor === String) {
-    return String(value)
-  } else if (ctor === Boolean) {
-    return Boolean(value)
-  } else if (ctor === Symbol) {
+  if (ctor === Number
+    || ctor === String
+    || ctor === Boolean
+    || ctor === Symbol) {
     return value.valueOf()
   } else {
     return value
