@@ -15,14 +15,14 @@ function sendData(data, port) {
   }
 
   return new Promise((resolve, reject) => {
-    const req = http.request(options, resolve);
+    const req = http.request(options, resolve)
     req.on('error', e => {
       console.error(e)
       reject(e)
     })
 
-    req.write(data);
-    req.end();
+    req.write(data)
+    req.end()
   })
 }
 
@@ -272,6 +272,29 @@ dump.clear = function clear() {
   })
 }
 
+dump.html = function html(htmlString, title) {
+  if (typeof htmlString !== 'string') {
+    throw new Error('Invalid HTML string.')
+  }
+
+  return new Promise((resolve, reject) => {
+    queue.push({
+      resolve,
+      reject,
+      port: dump.port,
+      data: JSON.stringify({
+        $type: 'DumpContainer, node.js',
+        $value: htmlString,
+        title
+      })
+    })
+
+    if (queue.length === 1) {
+      consume()
+    }
+  })
+}
+
 dump.port = 5255
 
 Object.prototype.dump = dumpSelf
@@ -280,4 +303,6 @@ String.prototype.dump = dumpSelf
 Boolean.prototype.dump = dumpSelf
 Symbol.prototype.dump = dumpSelf
 
-module.exports = dump;
+module.exports = dump
+
+dump.html('<p><a href="http://www.gooogle.com">Go to Google</a></p>', 'Title')
