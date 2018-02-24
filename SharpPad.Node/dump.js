@@ -110,6 +110,14 @@ function convertToObject(value) {
 
 function getJSON(obj) {
   obj = simplify(obj)
+
+  if (obj instanceof Date) {
+    return {
+      $type: 'Date, node.js',
+      utc: obj.toUTCString()
+    }
+  }
+
   if (obj instanceof RegExp) {
     return {
       $type: 'RegExp, node.js',
