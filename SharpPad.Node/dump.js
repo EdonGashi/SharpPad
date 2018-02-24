@@ -288,7 +288,10 @@ dump.html = function html(htmlString, title) {
       port: dump.port,
       data: JSON.stringify({
         $type: 'DumpContainer, node.js',
-        $value: htmlString,
+        $value: {
+          $type: 'html',
+          $html: htmlString
+        },
         title
       })
     })
